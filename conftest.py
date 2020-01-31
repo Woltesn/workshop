@@ -1,10 +1,11 @@
 import pytest
 from selenium import webdriver
+import pickle
 
 @pytest.fixture(scope="function")
 def browser():
     print("\nstart browser for test..")
-    driver = webdriver.Chrome(executable_path="./chrome_driver/chromedriver")
-    yield
+    browser = webdriver.Chrome('/home/dmitriy123/PycharmProjects/workshop_preproject/chrome_driver/chromedriver')
+    yield browser
     print("\nquit browser..")
-    driver.quit()
+    browser.quit()
