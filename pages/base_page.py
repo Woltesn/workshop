@@ -16,5 +16,6 @@ class BasePage():
             self.browser.add_cookie(cookie)
         self.browser.refresh()
         print(1)
+        self.browser.get(self.url)
         # time.sleep(40)
         # pickle.dump(self.browser.get_cookies(), open("cookies1.pkl", "wb"))
