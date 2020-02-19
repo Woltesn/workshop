@@ -1,0 +1,8 @@
+Для создания requirements.txt:
+pip freeze > requirements.txt
+
+Для установки requirements.txtЖ
+pip install -r requirements.txt
+
+Что-бы убрать лишнюю информацию с отчета:
+pytest -v --tb=line
