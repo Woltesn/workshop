@@ -1,7 +1,7 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
-import pickle
+from selenium.webdriver.chrome.options import Options
 
 @pytest.fixture(scope="function")
 def browser():
@@ -16,8 +16,11 @@ def browser():
     #     command_executor="http://127.0.0.1:4444/wd/hub",
     #     desired_capabilities=capabilities)
 
+
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
     print("\nstart browser for test..")
-    browser = webdriver.Chrome('/home/dmitriy123/PycharmProjects/workshop_preproject/chrome_driver/chromedriver')
+    browser = webdriver.Chrome('/home/dmitriy123/PycharmProjects/workshop_preproject/chrome_driver/chromedriver', options=chrome_options)
     browser.implicitly_wait(10)
     browser.wait = WebDriverWait(5, browser)
     browser.maximize_window()
