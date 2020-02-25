@@ -1,15 +1,16 @@
-from allure_commons.types import AttachmentType
+# from allure_commons.types import AttachmentType
 
 from .base_page import BasePage
 from selenium.webdriver.common.by import By
 import time
-import allure
+# import allure
 import datetime
 
-@allure.severity(allure.severity_level.NORMAL)
+# @allure.severity(allure.severity_level.NORMAL)
 class MainPage(BasePage):
 
-    @allure.severity(allure.severity_level.MINOR)
+
+    # @allure.severity(allure.severity_level.MINOR)
     def from_main_page_to_booking_list(self):
         time.sleep(2)
         self.browser.find_element(By.XPATH, '//*[@id="positional-buttons"]/a[1]/button').click()
@@ -17,7 +18,8 @@ class MainPage(BasePage):
         self.browser.find_element(By.XPATH, '//*[@id="country"]').send_keys('Van')
         self.browser.find_element(By.ID, 'fly').click()
         time.sleep(2)
-        self.enter_button = self.browser.find_element_by_xpath('//*[@id="map"]/div[4]/div[2]/div/div[3]/a')
+        self.enter_button = self.browser.find_element_by_xpath('/html/body/div[1]/div[4]/div[2]/div/div[3]/a')
+
         self.enter_button.click()
         time.sleep(2)
         self.browser.find_element(By.ID, 'fly').click()
@@ -30,7 +32,7 @@ class MainPage(BasePage):
         # Click on "Request your booking" button
         self.browser.find_element(By.XPATH, '/html/body/main/div[1]/div[5]/div/a/span').click()
 
-    @allure.severity(allure.severity_level.NORMAL)
+    # @allure.severity(allure.severity_level.NORMAL)
     def fill_in_all_fields_driver(self):
         print("OK")
         self.browser.find_element_by_name('first_name').clear()
@@ -45,6 +47,7 @@ class MainPage(BasePage):
         self.browser.find_element_by_name('agency').send_keys('WFP')
         self.browser.find_element_by_name('index_number').clear()
         self.browser.find_element_by_name('index_number').send_keys('12')
+        self.browser.find_element_by_id('id_manager_email').clear()
         self.browser.find_element_by_id('id_manager_email').send_keys('dmitriy.petrenko+manager@anvileight.com')
         self.browser.find_element_by_id('id_n_of_passengers').send_keys('1')
         self.browser.find_element_by_id('airport_type_button').click()
@@ -90,16 +93,11 @@ class MainPage(BasePage):
         self.browser.find_element_by_id('id_remarks').send_keys(300 * 'a')
         time.sleep(0.3)
         self.browser.find_element_by_class_name('icon-booking').click()
-        not_found = True
-        try:
-            self.browser.find_elements_by_link_text(
-                "Your request has been sent successfully. You will receive a copy of your request at 123")
-        except:
-            allure.attach(self.browser.get_screenshot_as_png(), name="testBookingScreen",
-                          attachment_type=AttachmentType.PNG)
-            not_found = False
-        assert not_found
+        print("_________")
+        print(self.browser.find_element(By.XPATH, '/html/body/main/section/div[2]/div/h3'))
+        print("_________")
+        assert "Humanitarian Booking Hub" == self.browser.title
+        massege_after_booking = self.browser.find_element(By.XPATH, '/html/body/main/section/div[2]/div/h3')
+        print(massege_after_booking.text)
+        assert massege_after_booking.text == "Your request has been sent successfully."
 
-    def fill_in_all_fields_accommodation(self):
-        self.browser.find_element(By.NAME, 'first_name').send_keys('Dmitriy_selenium_test')
-        self.browser.find_element(By.NAME, 'last_name').send_keys('Peternko_selenium_test')
