@@ -20,7 +20,7 @@ def browser():
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     print("\nstart browser for test..")
-    browser = webdriver.Chrome('/home/dmitriy123/PycharmProjects/workshop_preproject/chrome_driver/chromedriver', options=chrome_options)
+    browser = webdriver.Chrome('chrome_driver/chromedriver', options=chrome_options)
     browser.implicitly_wait(10)
     browser.wait = WebDriverWait(5, browser)
     browser.maximize_window()
@@ -28,8 +28,6 @@ def browser():
     yield browser
     print("\nquit browser..")
     browser.quit()
-
-
 
 
 # class BaseSelenoidWebdriver(object):
